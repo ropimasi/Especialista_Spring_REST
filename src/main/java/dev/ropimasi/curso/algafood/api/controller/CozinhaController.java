@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import dev.ropimasi.curso.algafood.domain.exception.EntidadeEmUsoException;
-import dev.ropimasi.curso.algafood.domain.exception.EntidadeNaoEncontradaException;
 import dev.ropimasi.curso.algafood.domain.model.Cozinha;
 import dev.ropimasi.curso.algafood.domain.repository.CozinhaRepository;
 import dev.ropimasi.curso.algafood.domain.service.CozinhaCadastroService;
 
 /* teste git  */
+
+
 
 
 @RestController
@@ -30,7 +30,6 @@ public class CozinhaController {
 
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
-	
 
 	@Autowired
 	private CozinhaCadastroService cozinhaCadastroService;
@@ -40,7 +39,7 @@ public class CozinhaController {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Cozinha> listar() {
 		return cozinhaRepository.findAll();
-		
+
 	}
 
 
@@ -88,20 +87,26 @@ public class CozinhaController {
 		return ResponseEntity.notFound().build();
 	}
 
+	//	@DeleteMapping(value = "/{cozinhaId}")
+	//	public ResponseEntity<?> remover(@PathVariable Long cozinhaId) {
+	//		try {
+	//			cozinhaCadastroService.excluir(cozinhaId);
+	//			return ResponseEntity.noContent().build();
+	//
+	//		} catch (EntidadeNaoEncontradaException e) {
+	//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	//
+	//		} catch (EntidadeEmUsoException e) {
+	//			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+	//		}
+	//	}
+
 
 
 	@DeleteMapping(value = "/{cozinhaId}")
-	public ResponseEntity<?> remover(@PathVariable Long cozinhaId) {
-		try {
-			cozinhaCadastroService.excluir(cozinhaId);
-			return ResponseEntity.noContent().build();
-
-		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-
-		} catch (EntidadeEmUsoException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-		}
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover(@PathVariable Long cozinhaId) {
+		cozinhaCadastroService.excluir(cozinhaId);
 	}
 
 }
