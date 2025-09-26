@@ -24,7 +24,9 @@ public class ItemPedido {
 	@EqualsAndHashCode.Include
 	private Long id;
 
-	//private Pedido pedido;
+	@ManyToOne
+	@JoinColumn(name = "pedido_id", nullable = false)
+	private Pedido pedido;
 
 	@ManyToOne
 	@JoinColumn(name = "produto_id", nullable = false)
