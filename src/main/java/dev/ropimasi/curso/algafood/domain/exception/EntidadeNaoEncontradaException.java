@@ -7,7 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND) //, reason = "Entidade não encontrada")
+//@ResponseStatus(value = HttpStatus.NOT_FOUND) //, reason = "Entidade não encontrada")
 public class EntidadeNaoEncontradaException extends ResponseStatusException {
 
 	private static final long serialVersionUID = 1L;
