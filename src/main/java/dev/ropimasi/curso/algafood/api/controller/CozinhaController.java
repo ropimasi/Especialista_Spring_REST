@@ -60,6 +60,7 @@ public class CozinhaController {
 
 
 	@PutMapping(value = "/{cozinhaId}")
+	//@ResponseStatus(HttpStatus.OK) já é padrão.
 	public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
 		Cozinha cozinhaPersistida = cozinhaCadastroService.buscarOuFalhar(cozinhaId);
 
