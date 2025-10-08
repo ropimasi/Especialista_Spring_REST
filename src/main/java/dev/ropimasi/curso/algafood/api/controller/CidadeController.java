@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import dev.ropimasi.curso.algafood.domain.exception.EntidadeNaoEncontradaException;
+import dev.ropimasi.curso.algafood.domain.exception.NegocioException;
 import dev.ropimasi.curso.algafood.domain.model.Cidade;
 import dev.ropimasi.curso.algafood.domain.repository.CidadeRepository;
 import dev.ropimasi.curso.algafood.domain.service.CidadeCadastroService;
@@ -49,7 +51,11 @@ public class CidadeController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cidade adicionar(@RequestBody Cidade cidade) {
-		return cidadeCadastroService.salvar(cidade);
+		try {
+			return cidadeCadastroService.salvar(cidade);
+		} catch (Exception e) {
+			throw new NegocioException(e.getMessage());
+		}
 	}
 
 
@@ -57,10 +63,13 @@ public class CidadeController {
 	@PutMapping(value = "/{cidadeId}")
 	public Cidade atualizar(@PathVariable Long cidadeId, @RequestBody Cidade cidade) {
 		Cidade cidadePersistida = cidadeCadastroService.buscarOuFalhar(cidadeId);
-
 		BeanUtils.copyProperties(cidade, cidadePersistida, "id");
+		try {
+			return cidadeCadastroService.salvar(cidadePersistida);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
 
-		return cidadeCadastroService.salvar(cidadePersistida);
+		}
 	}
 
 
