@@ -58,9 +58,7 @@ public class EstadoController {
 	//@ResponseStatus(HttpStatus.OK) já é padrão.
 	public Estado atualizar(@PathVariable Long estadoId, @RequestBody Estado estado) {
 		Estado estadoPersistido = estadoCadastroService.buscarOuFalhar(estadoId);
-
 		BeanUtils.copyProperties(estado, estadoPersistido, "id");
-
 		return estadoCadastroService.salvar(estadoPersistido);
 	}
 

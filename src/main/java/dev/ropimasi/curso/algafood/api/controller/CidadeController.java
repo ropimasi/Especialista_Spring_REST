@@ -53,7 +53,7 @@ public class CidadeController {
 	public Cidade adicionar(@RequestBody Cidade cidade) {
 		try {
 			return cidadeCadastroService.salvar(cidade);
-		} catch (Exception e) {
+		} catch (EntidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
