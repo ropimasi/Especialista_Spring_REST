@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import dev.ropimasi.curso.algafood.domain.exception.EntidadeEmUsoException;
-import dev.ropimasi.curso.algafood.domain.exception.EntidadeNaoEncontradaException;
+import dev.ropimasi.curso.algafood.domain.exception.RestauranteNaoEncontradoException;
 import dev.ropimasi.curso.algafood.domain.model.Cozinha;
 import dev.ropimasi.curso.algafood.domain.model.Restaurante;
 import dev.ropimasi.curso.algafood.domain.repository.RestauranteRepository;
@@ -16,7 +16,6 @@ import dev.ropimasi.curso.algafood.domain.repository.RestauranteRepository;
 @Service
 public class RestauranteCadastroService {
 
-	private static final String MSG_RESTAURANTE_NAO_ENCONTRADO = "Não existe um cadastro de Restaurante com código %d.";
 	private static final String MSG_RESTAURANTE_EM_USO = "Restaurante de código %d não pode ser removido, pois está em uso.";
 
 	@Autowired
@@ -28,8 +27,8 @@ public class RestauranteCadastroService {
 
 
 	public Restaurante buscarOuFalhar(Long restauranteId) {
-		return restauranteRepository.findById(restauranteId).orElseThrow(
-				() -> new EntidadeNaoEncontradaException(String.format(MSG_RESTAURANTE_NAO_ENCONTRADO, restauranteId)));
+		return restauranteRepository.findById(restauranteId)
+				.orElseThrow(() -> new RestauranteNaoEncontradoException(restauranteId));
 	}
 
 
@@ -48,7 +47,7 @@ public class RestauranteCadastroService {
 			restauranteRepository.deleteById(restauranteId);
 
 		} catch (EmptyResultDataAccessException e) {
-			throw new EntidadeNaoEncontradaException(String.format(MSG_RESTAURANTE_NAO_ENCONTRADO, restauranteId));
+			throw new RestauranteNaoEncontradoException(restauranteId);
 
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(String.format(MSG_RESTAURANTE_EM_USO, restauranteId));
