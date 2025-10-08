@@ -61,9 +61,7 @@ public class CozinhaController {
 	//@ResponseStatus(HttpStatus.OK) já é padrão.
 	public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
 		Cozinha cozinhaPersistida = cozinhaCadastroService.buscarOuFalhar(cozinhaId);
-
 		BeanUtils.copyProperties(cozinha, cozinhaPersistida, "id");
-
 		return cozinhaCadastroService.salvar(cozinhaPersistida);
 	}
 
