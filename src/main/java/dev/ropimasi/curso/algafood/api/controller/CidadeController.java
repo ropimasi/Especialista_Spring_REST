@@ -85,8 +85,4 @@ public class CidadeController {
 		cidadeCadastroService.excluir(cidadeId);
 	}
 
-
-
-
-
 }
