@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import dev.ropimasi.curso.algafood.api.exceptionhandler.Problema;
+import dev.ropimasi.curso.algafood.api.exceptionhandler.Problem;
 import dev.ropimasi.curso.algafood.domain.exception.EntidadeNaoEncontradaException;
 import dev.ropimasi.curso.algafood.domain.exception.EstadoNaoEncontradoException;
 import dev.ropimasi.curso.algafood.domain.exception.NegocioException;
