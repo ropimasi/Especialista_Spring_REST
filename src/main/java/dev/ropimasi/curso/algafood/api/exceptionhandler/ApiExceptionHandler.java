@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -18,6 +19,22 @@ import dev.ropimasi.curso.algafood.domain.exception.NegocioException;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+
+	@Override
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+
+//		status = HttpStatus.BAD_REQUEST;
+		ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSEVEL;
+		String detail = "O corpo da requisição está inválido. Verifique erro de sintaxe.";
+		Problem problem = createProblemBuilder((HttpStatus) status, problemType, detail).build();
+
+		// FIXME: MUDANÇA DE VERSÃO DO SPRING MUDOU A ASSINATURA DESSE MÉTODO. 
+		return super.handleHttpMessageNotReadable(ex/*, problem*/, new HttpHeaders(), status, request);
+	}
+
+
+
 	public ResponseEntity<?> handleEntidadeNaoEncontradoException(EntidadeNaoEncontradaException ex,
 			WebRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
