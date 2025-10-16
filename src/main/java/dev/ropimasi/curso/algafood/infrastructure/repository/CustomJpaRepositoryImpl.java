@@ -1,10 +1,10 @@
 package dev.ropimasi.curso.algafood.infrastructure.repository;
 
 import java.util.Optional;
+import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import dev.ropimasi.curso.algafood.domain.repository.CustomJpaRepository;
-import jakarta.persistence.EntityManager;
 
 
 
