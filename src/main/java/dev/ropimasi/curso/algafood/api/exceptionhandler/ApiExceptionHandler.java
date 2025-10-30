@@ -1,5 +1,6 @@
 package dev.ropimasi.curso.algafood.api.exceptionhandler;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -218,9 +219,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpStatus status, WebRequest request) {
 
 		if (body == null) {
-			body = Problem.builder().title(((HttpStatus) status).getReasonPhrase()).status(status.value()).build();
+			body = Problem.builder()
+					.timeStamp(LocalDateTime.now())
+					.title(((HttpStatus) status).getReasonPhrase())
+					.status(status.value())
+					.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
+					.build();
 		} else if (body instanceof String) {
-			body = Problem.builder().title((String) body).status(status.value()).build();
+			body = Problem.builder()
+					.timeStamp(LocalDateTime.now())
+					.title((String) body)
+					.status(status.value())
+					.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
+					.build();
 		}
 
 		return super.handleExceptionInternal(ex, body, headers, status, request);
@@ -229,8 +240,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 
 	private Problem.ProblemBuilder createProblemBuilder(HttpStatus status, ProblemType problemType, String detail) {
-		return Problem.builder().status(status.value()).type(problemType.getUri()).title(problemType.getTitle())
+		return Problem.builder()
+				.timeStamp(LocalDateTime.now())
+				.status(status.value())
+				.type(problemType.getUri())
+				.title(problemType.getTitle())
 				.detail(detail);
 	}
 
 }
+
+
+
+

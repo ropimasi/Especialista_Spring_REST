@@ -1,5 +1,6 @@
 package dev.ropimasi.curso.algafood.api.exceptionhandler;
 
+import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import lombok.Getter;
 @Builder
 public class Problem {
 
+	private LocalDateTime timeStamp;
 	private Integer status;
 	private String type;
 	private String title;
