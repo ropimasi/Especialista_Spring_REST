@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,14 +35,15 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 
+	@NotNull
 	@Column(nullable = false)
 	private String nome;
 
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
-//	@JsonIgnore
-//	@JsonIgnoreProperties("hibernateLazyInitializer")
+	//	@JsonIgnore
+	//	@JsonIgnoreProperties("hibernateLazyInitializer")
 	@ManyToOne //(fetch = FetchType.LAZY) // Alternativa = usar @Query method no Repository.
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
@@ -62,9 +64,7 @@ public class Restaurante {
 
 	@JsonIgnore
 	@ManyToMany //(fetch = FetchType.EAGER) // EAGER só de exemplo didático. 
-	@JoinTable(name = "restaurante_forma_pagamento",
-			joinColumns = @JoinColumn(name = "restaurante_id"),
-			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+	@JoinTable(name = "restaurante_forma_pagamento", joinColumns = @JoinColumn(name = "restaurante_id"), inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
 	private List<FormaPagamento> formasPagamento = new ArrayList<FormaPagamento>();
 
 	@JsonIgnore
