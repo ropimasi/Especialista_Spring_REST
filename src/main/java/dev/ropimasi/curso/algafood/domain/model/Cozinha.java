@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.ropimasi.curso.algafood.domain.Groups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,6 +23,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class Cozinha {
 
+	@NotNull(groups = {Groups.CadastroRestaurante.class})
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
