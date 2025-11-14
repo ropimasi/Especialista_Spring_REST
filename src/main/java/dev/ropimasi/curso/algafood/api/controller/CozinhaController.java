@@ -1,6 +1,7 @@
 package dev.ropimasi.curso.algafood.api.controller;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +52,7 @@ public class CozinhaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
+	public Cozinha adicionar(@RequestBody @Valid Cozinha cozinha) {
 		return cozinhaCadastroService.salvar(cozinha);
 	}
 
@@ -59,7 +60,7 @@ public class CozinhaController {
 
 	@PutMapping(value = "/{cozinhaId}")
 	//@ResponseStatus(HttpStatus.OK) já é padrão.
-	public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
+	public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody @Valid Cozinha cozinha) {
 		Cozinha cozinhaPersistida = cozinhaCadastroService.buscarOuFalhar(cozinhaId);
 		BeanUtils.copyProperties(cozinha, cozinhaPersistida, "id");
 		return cozinhaCadastroService.salvar(cozinhaPersistida);

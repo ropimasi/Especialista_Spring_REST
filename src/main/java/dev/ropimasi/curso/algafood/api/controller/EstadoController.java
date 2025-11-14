@@ -1,6 +1,7 @@
 package dev.ropimasi.curso.algafood.api.controller;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +49,7 @@ public class EstadoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Estado adicionar(@RequestBody Estado estado) {
+	public Estado adicionar(@RequestBody @Valid Estado estado) {
 		return estadoCadastroService.salvar(estado);
 	}
 
@@ -56,7 +57,7 @@ public class EstadoController {
 
 	@PutMapping("/{estadoId}")
 	//@ResponseStatus(HttpStatus.OK) já é padrão.
-	public Estado atualizar(@PathVariable Long estadoId, @RequestBody Estado estado) {
+	public Estado atualizar(@PathVariable Long estadoId, @RequestBody @Valid Estado estado) {
 		Estado estadoPersistido = estadoCadastroService.buscarOuFalhar(estadoId);
 		BeanUtils.copyProperties(estado, estadoPersistido, "id");
 		return estadoCadastroService.salvar(estadoPersistido);
