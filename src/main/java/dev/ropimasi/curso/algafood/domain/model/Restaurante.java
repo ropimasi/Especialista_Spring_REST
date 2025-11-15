@@ -45,7 +45,7 @@ public class Restaurante {
 
 	//@NotNull
 	//@NotEmpty
-	@NotBlank
+	@NotBlank(message = "O nome do restaurante é obrigatório")
 	@Column(nullable = false)
 	private String nome;
 
