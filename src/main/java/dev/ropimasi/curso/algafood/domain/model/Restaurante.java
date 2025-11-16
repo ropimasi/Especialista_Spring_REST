@@ -50,6 +50,7 @@ public class Restaurante {
 	private String nome;
 
 	//@DecimalMin(value = "0") // maior ou igual a 0.
+	@NotNull
 	@PositiveOrZero
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
