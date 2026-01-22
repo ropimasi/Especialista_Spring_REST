@@ -39,7 +39,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Autowired
 	private MessageSource messageSource;
-	
+
+
 
 	/* Método que trata exceção de argumento inválido (null) passado para método,
 	 * e outros violações lançadas através do Bean Validation na controller. */
@@ -52,24 +53,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 				.format("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.");
 
 		BindingResult bindingResult = ex.getBindingResult();
-		
-		List<Problem.Field> problemFields = bindingResult.getFieldErrors().stream()
-				.map(fieldError -> {
-					String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-					
-					return Problem.Field.builder()
-						.name(fieldError.getField())
-						.userMessage(message)
-						.build();
-				})
-				.collect(Collectors.toList());
-		
-		Problem problem = createProblemBuilder(status, problemType, detail)
-				.userMessage(detail)
-				.fields(problemFields)
+
+		List<Problem.Field> problemFields = bindingResult.getFieldErrors().stream().map(fieldError -> {
+			String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+
+			return Problem.Field.builder().name(fieldError.getField()).userMessage(message).build();
+		}).collect(Collectors.toList());
+
+		Problem problem = createProblemBuilder(status, problemType, detail).userMessage(detail).fields(problemFields)
 				.build();
 
-		return super.handleExceptionInternal(ex, problem, headers, status, request);
+		//return super.handleExceptionInternal(ex, problem, headers, status, request);
+		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 
 
