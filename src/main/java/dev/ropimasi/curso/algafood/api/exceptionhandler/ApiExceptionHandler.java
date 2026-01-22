@@ -45,7 +45,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 		Problem problem = createProblemBuilder(status, problemType, detail).userMessage(detail).build();
 
-		return super.handleExceptionInternal(ex, problem, headers, status, request);
+		//return super.handleExceptionInternal(ex, problem, headers, status, request);
+		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 
 
