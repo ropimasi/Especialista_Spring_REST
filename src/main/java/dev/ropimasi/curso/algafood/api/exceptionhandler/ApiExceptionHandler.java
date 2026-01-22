@@ -60,7 +60,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 				.fields(problemFields)
 				.build();
 
-		return super.handleExceptionInternal(ex, problem, headers, status, request);
+		//return super.handleExceptionInternal(ex, problem, headers, status, request);
+		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 
 
