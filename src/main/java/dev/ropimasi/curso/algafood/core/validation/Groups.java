@@ -1,4 +1,4 @@
-package dev.ropimasi.curso.algafood.domain;
+package dev.ropimasi.curso.algafood.core.validation;
 
 public interface Groups {
 

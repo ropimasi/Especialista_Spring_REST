@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import dev.ropimasi.curso.algafood.domain.Groups;
+import dev.ropimasi.curso.algafood.core.validation.Groups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

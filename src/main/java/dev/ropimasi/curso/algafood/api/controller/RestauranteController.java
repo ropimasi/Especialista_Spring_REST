@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.ropimasi.curso.algafood.domain.Groups;
+import dev.ropimasi.curso.algafood.core.validation.Groups;
 import dev.ropimasi.curso.algafood.domain.exception.CozinhaNaoEncontradaException;
 import dev.ropimasi.curso.algafood.domain.exception.EntidadeNaoEncontradaException;
 import dev.ropimasi.curso.algafood.domain.exception.NegocioException;

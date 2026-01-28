@@ -26,7 +26,7 @@ import javax.validation.groups.Default;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.ropimasi.curso.algafood.domain.Groups;
+import dev.ropimasi.curso.algafood.core.validation.Groups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -51,7 +51,7 @@ public class Restaurante {
 
 	//@DecimalMin(value = "0") // maior ou igual a 0.
 	@NotNull
-	@PositiveOrZero(message = "{TaxaFrete.invalida}")
+	@PositiveOrZero //(message = "{TaxaFrete.invalida}")
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
